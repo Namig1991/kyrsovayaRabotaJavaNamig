@@ -78,34 +78,34 @@ public class Main {
 
     public static int payrollCosts (Employee[] employees){
         int totalExpenses = 0;
-        for(int i = 0; i < employees.length; i++) {
-            totalExpenses += employees[i].getSalary();
+        for(Employee i : employees) {
+            totalExpenses += i.getSalary();
         }
         return totalExpenses;
     }
 
     public static Employee minimalPay(Employee[] employees) {
-        Employee employeeWithMinPay = employees[0];
-        int min = employeeWithMinPay.getSalary();
+        Employee employeeMinPay = employees[0];
+        int min = employeeMinPay.getSalary();
         for (int i = 1; i < employees.length; i++) {
             if (employees[i].getSalary() < min) {
                 min = employees[i].getSalary();
-                employeeWithMinPay = employees[i];
+                employeeMinPay = employees[i];
             }
         }
-        return employeeWithMinPay;
+        return employeeMinPay;
     }
 
     public static Employee maximumPay(Employee[] employees) {
-        Employee employeeWithMinPay = employees[0];
-        int max = employeeWithMinPay.getSalary();
+        Employee employeeMaxPay = employees[0];
+        int max = employeeMaxPay.getSalary();
         for (int i = 1; i < employees.length; i++) {
             if (employees[i].getSalary() > max) {
                 max = employees[i].getSalary();
-                employeeWithMinPay = employees[i];
+                employeeMaxPay = employees[i];
             }
         }
-        return employeeWithMinPay;
+        return employeeMaxPay;
     }
 
     public static int mean (Employee[] employees) {
@@ -120,5 +120,7 @@ public class Main {
            System.out.println("Ф.И.О = " + fullNameStaff);
        }
     }
+
+
 
 }
