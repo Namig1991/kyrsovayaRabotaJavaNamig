@@ -3,11 +3,11 @@ package ru.skypro;
 import java.util.Objects;
 
 public class Employee {
-    private static int count;
+    private static int count = 0;
     private final String fullName;
     private int salary;
     private int department;
-    public static int id = 0;
+    public int id;
 
     public Employee (String fullName, int salary, int department) {
         this.fullName = fullName;
@@ -37,7 +37,7 @@ public class Employee {
         return department;
     }
 
-    public static int getId() {
+    public int getId() {
 
         return id;
     }
@@ -68,6 +68,5 @@ public class Employee {
     public String toString(){
         return "Ф.И.О " + fullName+ "Зарплата " + salary + " Отдел " + department;
     }
-
 
 }

@@ -1,10 +1,7 @@
 package ru.skypro;
 
-import java.sql.SQLOutput;
-import java.util.Arrays;
-import java.util.Scanner;
-
 public class Main {
+
 
     private final static Employee[] employees = new Employee[10];
 
@@ -19,6 +16,7 @@ public class Main {
         Employee ribkina = new Employee("Рыбкина Кристина Анатольевна", 140_000, 3);
         Employee bobrov = new Employee("Бобров Евгений Викторович", 95_000, 5);
         Employee mishkin = new Employee("Мишкин Михаил Михайлович",220_000,1);
+
 
         ivanov.setSalary(150_000);
         ivanov.setDepartment(1);
@@ -55,19 +53,19 @@ public class Main {
 
         workList();
 
-        payrollCosts(employees);
-        System.out.println("Сумма затрат на зарплаты в месяц = " + payrollCosts(employees));
+        payrollCosts();
+        System.out.println("Сумма затрат на зарплаты в месяц = " + payrollCosts());
 
-        minimalPay(employees);
-        System.out.println("Минимальная заработная плата сотрудника = " + minimalPay(employees));
+        minimalPay();
+        System.out.println("Минимальная заработная плата сотрудника = " + minimalPay());
 
-        maximumPay(employees);
-        System.out.println("Максимальная заработная плата сотрудника = " + maximumPay(employees));
+        maximumPay();
+        System.out.println("Максимальная заработная плата сотрудника = " + maximumPay());
 
-        mean(employees);
-        System.out.println("Среднее значение зарплат = " + mean(employees));
+        mean();
+        System.out.println("Среднее значение зарплат = " + mean());
 
-        fullNameStaff(employees);
+        fullNameStaff();
     }
 
     public static void workList() {
@@ -76,7 +74,7 @@ public class Main {
         }
     }
 
-    public static int payrollCosts (Employee[] employees){
+    public static int payrollCosts (){
         int totalExpenses = 0;
         for(Employee i : employees) {
             totalExpenses += i.getSalary();
@@ -84,7 +82,7 @@ public class Main {
         return totalExpenses;
     }
 
-    public static Employee minimalPay(Employee[] employees) {
+    public static Employee minimalPay() {
         Employee employeeMinPay = employees[0];
         int min = employeeMinPay.getSalary();
         for (int i = 1; i < employees.length; i++) {
@@ -96,7 +94,7 @@ public class Main {
         return employeeMinPay;
     }
 
-    public static Employee maximumPay(Employee[] employees) {
+    public static Employee maximumPay() {
         Employee employeeMaxPay = employees[0];
         int max = employeeMaxPay.getSalary();
         for (int i = 1; i < employees.length; i++) {
@@ -108,19 +106,17 @@ public class Main {
         return employeeMaxPay;
     }
 
-    public static int mean (Employee[] employees) {
-        int averageExpenses = payrollCosts(employees) / employees.length;
+    public static int mean () {
+        int averageExpenses = payrollCosts() / employees.length;
         return averageExpenses;
     }
 
-    public static void fullNameStaff (Employee[] employees) {
+    public static void fullNameStaff () {
        String fullNameStaff;
        for(Employee i : employees) {
            fullNameStaff = i.getFullName();
            System.out.println("Ф.И.О = " + fullNameStaff);
        }
     }
-
-
 
 }
