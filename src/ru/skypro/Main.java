@@ -6,7 +6,7 @@ public class Main {
     private final static Employee[] employees = new Employee[10];
 
     public static void main(String[] args) {
-        Employee ivanov = new Employee("Иванов Иван Иванович", 150_000, 3);
+        Employee ivanov = new Employee("Иванов Иван Иванович", 150_000, 1);
         Employee voronov = new Employee("Воронов Виктор Павлович", 160_000, 2);
         Employee karpov = new Employee("Карпов Евгений Васильевич", 185_000, 1);
         Employee ytkina = new Employee("Уткина Ксения Николаевна", 120_000, 2);
@@ -16,7 +16,6 @@ public class Main {
         Employee ribkina = new Employee("Рыбкина Кристина Анатольевна", 140_000, 3);
         Employee bobrov = new Employee("Бобров Евгений Викторович", 95_000, 5);
         Employee mishkin = new Employee("Мишкин Михаил Михайлович",220_000,1);
-
 
         ivanov.setSalary(150_000);
         ivanov.setDepartment(1);
@@ -50,7 +49,6 @@ public class Main {
         employees[8] = bobrov;
         employees[9] = mishkin;
 
-
         workList();
 
         payrollCosts();
@@ -66,11 +64,34 @@ public class Main {
         System.out.println("Среднее значение зарплат = " + mean());
 
         fullNameStaff();
+
+        indexPay(0);
+
+        departmentMinSalaryWork(1);
+        System.out.println("Минимальная заработная плата по отделу " + departmentMinSalaryWork(1));
+
+        departmentMaxSalaryWork(2);
+        System.out.println("Максимальная заработная плата по отделу " + departmentMaxSalaryWork(2));
+
+        calculateTotalSalaryOfTeam(3);
+        System.out.println("Сумма затрат на зарплаты по отделу " + calculateTotalSalaryOfTeam(3));
+
+        indexationOfSalariesByDepartment(1,0);
+
+        calculateAverageSalaryOfTeam(1);
+        System.out.println("Средняя зарплата по отделу " + calculateAverageSalaryOfTeam(1));
+
+        departmentStuffNum(1);
+
+        salarySorting(100000);
+
+        salarySortingMax(200000);
+
     }
 
     public static void workList() {
-        for (Employee employee : employees) {
-            System.out.println(employee);
+        for (Employee i : employees) {
+            System.out.println(i);
         }
     }
 
@@ -107,8 +128,8 @@ public class Main {
     }
 
     public static int mean () {
-        int averageExpenses = payrollCosts() / employees.length;
-        return averageExpenses;
+        int averageSalary = payrollCosts() / employees.length;
+        return averageSalary;
     }
 
     public static void fullNameStaff () {
@@ -119,4 +140,98 @@ public class Main {
        }
     }
 
+    public static void indexPay (int percent) {
+        for (Employee employee : employees) {
+            int indexPayStaff = employee.getSalary();
+            employee.setSalary((int) (indexPayStaff /(percent / 100f + 1)));
+        }
+    }
+
+    public static Employee departmentMinSalaryWork (int departmentStaff) {
+        int minSalary = Integer.MAX_VALUE;
+        Employee result = null;
+        for(Employee employee : employees) {
+            if (employee.getDepartment() != departmentStaff) {
+                continue;
+            }
+
+            if(employee.getSalary() < minSalary) {
+                minSalary = employee.getSalary();
+                result = employee;
+            }
+        }
+        return result;
+    }
+
+    public static Employee departmentMaxSalaryWork (int depatmentStaff) {
+        int maxSalary = Integer.MIN_VALUE;
+        Employee result = null;
+        for (Employee i : employees) {
+            if(i.getDepartment() != depatmentStaff) {
+                continue;
+            }
+
+            if(i.getSalary() > maxSalary) {
+                maxSalary = i.getSalary();
+                result = i;
+            }
+        }
+        return result;
+    }
+
+    public static int calculateTotalSalaryOfTeam (int teamNumber) {
+        int sum = 0;
+        for (Employee employee : employees) {
+            if(employee.getDepartment() == teamNumber) {
+                sum += employee.getSalary();
+            }
+        }
+        return sum;
+    }
+
+    public static float calculateAverageSalaryOfTeam(int teamNumber) {
+        int membersCount = 0;
+        int sum = 0;
+        for (Employee employee : employees) {
+            if (employee.getDepartment() == teamNumber) {
+                sum += employee.getSalary();
+                membersCount++;
+            }
+        }
+        return sum / (float) membersCount;
+    }
+
+    public static void indexationOfSalariesByDepartment (int teamNum, int percentTeam) {
+        for(Employee employee : employees) {
+            if(employee.getDepartment() == teamNum) {
+                int currentSalary = employee.getSalary();
+                employee.setSalary((int) (currentSalary * (percentTeam / 100f + 1)));
+                System.out.println(employee.getSalary());
+            }
+        }
+    }
+
+    public static void departmentStuffNum (int numDepartment) {
+        for(Employee employee : employees) {
+            if(employee.getDepartment() == numDepartment) {
+                System.out.println(employee.getId() + " . " + employee.getFullName() + " Зарплата " + employee.getSalary());
+            }
+        }
+    }
+
+    public static void salarySorting (int salaryMinStuffAll) {
+        for(Employee employee : employees) {
+            if(employee.getSalary() < salaryMinStuffAll) {
+                System.out.println(employee.getId() + " . " + employee.getFullName() + " - " + employee.getSalary());
+            }
+        }
+    }
+
+    public static void salarySortingMax (int salaryMaxStuffAll) {
+        for(Employee employee : employees) {
+            if(employee.getSalary() >= salaryMaxStuffAll) {
+                System.out.println(employee.getId() + " . " + employee.getFullName() + " - " + employee.getSalary());
+            }
+        }
+    }
 }
