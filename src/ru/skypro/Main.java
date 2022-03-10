@@ -1,9 +1,12 @@
 package ru.skypro;
 
+import org.w3c.dom.ls.LSOutput;
+
 public class Main {
 
 
     private final static Employee[] employees = new Employee[10];
+
 
     public static void main(String[] args) {
         Employee ivanov = new Employee("Иванов Иван Иванович", 150_000, 1);
@@ -21,8 +24,8 @@ public class Main {
         ivanov.setDepartment(1);
         voronov.setSalary(160_000);
         voronov.setDepartment(2);
-        karpov.setSalary(120_000);
-        karpov.setDepartment(2);
+        karpov.setSalary(185_000);
+        karpov.setDepartment(1);
         ytkina.setSalary(120_000);
         ytkina.setDepartment(2);
         guseva.setSalary(98_000);
@@ -76,16 +79,34 @@ public class Main {
         calculateTotalSalaryOfTeam(3);
         System.out.println("Сумма затрат на зарплаты по отделу " + calculateTotalSalaryOfTeam(3));
 
+        //Проиндексировать зарплату всех сотрудников отдела на процент, который приходит в качестве параметра.
         indexationOfSalariesByDepartment(1,0);
 
         calculateAverageSalaryOfTeam(1);
         System.out.println("Средняя зарплата по отделу " + calculateAverageSalaryOfTeam(1));
 
+        //Напечатать всех сотрудников отдела (все данные, кроме отдела).
         departmentStuffNum(1);
 
+        //Всех сотрудников с зарплатой меньше числа (вывести id, Ф. И. О. и зарплату).
         salarySorting(100000);
 
+        //Всех сотрудников с зарплатой больше (или равно) числа (вывести id, Ф. И. О. и зарплату)
         salarySortingMax(200000);
+
+        System.out.println("=================================================================");
+
+        EmployeeBook employeeBook = new EmployeeBook();
+        employeeBook.createEmployee("Иванов Иван Иванович", 150000, 1);
+        employeeBook.createEmployee("Воронов Виктор Викторович",160000,2);
+        employeeBook.createEmployee("Карпов Евгений Васильевич",120000,2);
+        employeeBook.createEmployee("Уткина Ксения Николаевна",120000,2);
+        employeeBook.createEmployee("Гусева Любовь Олеговна",98000,3);
+        employeeBook.createEmployee("Козлов Алексей Александрович",100000,4);
+        employeeBook.createEmployee("Петухов Эдуард Эдуардович", 89000,5);
+        employeeBook.createEmployee("Рыбкина Кристиа Анатольевна", 140000, 3);
+        employeeBook.createEmployee("Бобров Евгений Викторович", 95000,5);
+        employeeBook.createEmployee("Мишкин Михаил Михайлович", 220000,1);
 
     }
 
@@ -231,7 +252,9 @@ public class Main {
         for(Employee employee : employees) {
             if(employee.getSalary() >= salaryMaxStuffAll) {
                 System.out.println(employee.getId() + " . " + employee.getFullName() + " - " + employee.getSalary());
+
             }
         }
     }
+
 }
